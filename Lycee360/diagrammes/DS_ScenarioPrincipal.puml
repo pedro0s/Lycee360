@@ -1,0 +1,29 @@
+@startuml
+actor Parent
+participant "GestionLycee" as GL
+participant "Eleve" as E
+participant "Evaluation" as Ev
+participant "AlerteRisque" as AR
+
+Parent -> GL: envoyerMessage()
+GL --> Parent: confirmation
+
+GL -> GL: ajouterNote(E, Ev, valeur)
+GL -> GL: calculerMoyenneEleve(E)
+GL --> GL: moyenne
+
+GL -> GL: enregistrerAbsence(E)
+GL -> GL: enregistrerRetard(E)
+
+GL -> GL: genererAlerte(E)
+GL --> AR: creer(score, niveau, action)
+
+alt score >= 60
+  GL --> Parent: notifier "risque eleve"
+else score >= 30
+  GL --> Parent: notifier "suivi hebdomadaire"
+else score < 30
+  GL --> Parent: notifier "suivi normal"
+end
+
+@enduml

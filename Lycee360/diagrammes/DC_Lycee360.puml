@@ -1,0 +1,52 @@
+@startuml
+
+class Utilisateur {
+  -id: int
+  -nom: String
+  -prenom: String
+  -email: String
+  -motDePasse: String
+  -role: String
+  +seConnecter(email, mdp): boolean
+}
+
+class Eleve {
+  -classe: String
+}
+
+class Enseignant {
+  -specialite: String
+}
+
+class ParentTuteur {
+  -lienParente: String
+}
+
+class Matiere
+class Evaluation
+class Note
+class Absence
+class Retard
+class Message
+class AlerteRisque
+class GestionLycee
+
+Utilisateur <|-- Eleve
+Utilisateur <|-- Enseignant
+Utilisateur <|-- ParentTuteur
+
+Evaluation --> Matiere : concerne
+Note --> Eleve : pour
+Note --> Evaluation : sur
+Absence --> Eleve : concerne
+Retard --> Eleve : concerne
+Message --> Utilisateur : expediteur
+Message --> Utilisateur : destinataire
+AlerteRisque --> Eleve : cible
+GestionLycee o-- Note : gere
+GestionLycee o-- Absence : gere
+GestionLycee o-- Retard : gere
+GestionLycee o-- Message : gere
+GestionLycee o-- AlerteRisque : gere
+
+@enduml

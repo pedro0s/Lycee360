@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+actor Administrateur
+actor Enseignant
+actor Eleve
+actor Parent
+actor Conseiller
+
+usecase "Se connecter" as UC1
+usecase "Gerer profils" as UC2
+usecase "Creer evaluation" as UC3
+usecase "Saisir note" as UC4
+usecase "Consulter moyenne" as UC5
+usecase "Enregistrer absence" as UC6
+usecase "Enregistrer retard" as UC7
+usecase "Envoyer message" as UC8
+usecase "Repondre message" as UC9
+usecase "Calculer score risque" as UC10
+usecase "Consulter dashboard alertes" as UC11
+usecase "Traiter alerte" as UC12
+
+Administrateur --> UC1
+Administrateur --> UC2
+Administrateur --> UC11
+Administrateur --> UC12
+
+Enseignant --> UC1
+Enseignant --> UC3
+Enseignant --> UC4
+Enseignant --> UC9
+
+Eleve --> UC1
+Eleve --> UC5
+
+Parent --> UC8
+Conseiller --> UC11
+Conseiller --> UC12
+
+UC4 ..> UC3 : <<include>>
+UC11 ..> UC10 : <<include>>
+UC12 ..> UC11 : <<extend>>
+
+@enduml
